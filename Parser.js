@@ -25,7 +25,7 @@ var options = {
     // Support gzip encoded responses (Should be enabled unless using custom headers)
     gzip: true,
     // Removes a few problematic TLSv1.0 ciphers to avoid CAPTCHA
-    agentOptions: { ciphers }
+    //agentOptions: { ciphers }
   };
 
 function sleep(ms) {

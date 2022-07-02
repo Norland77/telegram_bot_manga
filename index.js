@@ -6,7 +6,8 @@ const bot = new telegramApi(token, {polling: true});
 function sleep(ms) {
     ms += new Date().getTime();
     while (new Date() < ms){}
-} 
+}
+
 async function Parsing(text, chatID) {
     while(true) {
         let charpet = await parser(text);

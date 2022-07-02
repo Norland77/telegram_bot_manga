@@ -1,9 +1,5 @@
 const puppeteer = require('puppeteer');
 
-function sleep(ms) {
-    ms += new Date().getTime();
-    while (new Date() < ms){}
-} 
     const Start = async (text) => {
     console.log("Opening the browser......");
     browser = await puppeteer.launch({

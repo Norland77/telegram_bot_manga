@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 var cloudscraper = require('cloudscraper');
+const requestModule = require('request');
 var options = {
     uri: 'https://mangalib.me/',
     jar: requestModule.jar(), // Custom cookie jar

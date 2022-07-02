@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-    const Start = async (text) => {
+const StartPars = async (text) => {
     console.log("Opening the browser......");
     browser = await puppeteer.launch({
         dumpio: false,
@@ -30,10 +30,40 @@ const puppeteer = require('puppeteer');
     });
     await browser.close();
     console.log("Closing the browser......");
-    return {
-        url: urls,
-        title: title,
-        picture: picture,
+    console.log(urls);
+    if (urls.length == 0) {
+        return false
+    } else {
+        return {
+            url: urls,
+            title: title,
+            picture: picture,
+        }
     }
 } 
-module.exports = Start;
+const profilePars = async (url) => {
+    console.log("Opening the browser for profile......");
+    browser = await puppeteer.launch({
+        dumpio: false,
+        headless: true,
+        args: [
+            '--disable-setuid-sandbox',
+            '--no-sandbox',
+        ],
+        waitForInitialPage: true,
+    });
+    let pageProfile = await browser.newPage();
+    console.log(`Navigating to ${url}...`);
+    await pageProfile.goto(url, {timeout: 0});
+    await pageProfile.waitForSelector('.page__inner');
+    let urlsManga = await pageProfile.$$eval('.bookmark-item', urls => {
+        urls = urls.filter(urls => urls.querySelector('.bookmark-item__name'))
+        urls = urls.map(el => el.querySelector('.bookmark-item__info-header > a').href)
+        return urls;
+    });
+    await browser.close();
+    console.log("Closing the browser......");
+    return urlsManga;
+}
+
+module.exports = {StartPars, profilePars};

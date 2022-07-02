@@ -36,7 +36,7 @@ function sleep(ms) {
     console.log("Opening the browser......");
     browser = await puppeteer.launch({
         dumpio: false,
-        headless: true,
+        headless: false,
         args: [
             '--disable-setuid-sandbox',
             '--no-sandbox',

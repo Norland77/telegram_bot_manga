@@ -8,7 +8,7 @@ var options = {
       // User agent, Cache Control and Accept headers are required
       // User agent is populated by a random UA.
       'User-Agent': 'Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36',
-      'Cache-Control': 'private',
+      'Cache-Control': 'public',
       'Accept': 'application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5'
     },
     // Cloudscraper automatically parses out timeout required by Cloudflare.
@@ -36,7 +36,7 @@ function sleep(ms) {
     console.log("Opening the browser......");
     browser = await puppeteer.launch({
         dumpio: false,
-        headless: false,
+        headless: true,
         args: [
             '--disable-setuid-sandbox',
             '--no-sandbox',

@@ -27,8 +27,12 @@ function sleep(ms) {
         pictures = pictures.map(el => el.querySelector('img').src)
         return pictures;
     });
-    let title = await page.$$eval('.media-name__body', titles => {
+    /*let title = await page.$$eval('.media-name__body', titles => {
         titles = titles.map(el => el.querySelector('.media-name__alt').innerText)
+        return titles;
+    });*/
+    let title = await page.$$eval('.header > h1', titles => {
+        titles = titles.map(el => el.querySelector('span').innerText)
         return titles;
     });
     let urls = await page.$$eval('.vue-recycle-scroller__item-view', links => {

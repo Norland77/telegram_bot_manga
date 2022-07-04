@@ -20,7 +20,7 @@ const StartPars = async (text) => {
         return pictures;
     });
     let title = await page.$$eval('.media-name__body', titles => {
-        titles = titles.map(el => el.querySelector('.media-name__alt').innerText)
+        titles = titles.map(el => el.querySelector('.media-name__main').innerText)
         return titles;
     });
     let urls = await page.$$eval('.vue-recycle-scroller__item-view', links => {
@@ -32,7 +32,10 @@ const StartPars = async (text) => {
     console.log("Closing the browser......");
     console.log(urls);
     if (urls.length == 0) {
-        return false
+        return {
+            url: false,
+            title: title,
+        }
     } else {
         return {
             url: urls,
@@ -61,9 +64,16 @@ const profilePars = async (url) => {
         urls = urls.map(el => el.querySelector('.bookmark-item__info-header > a').href)
         return urls;
     });
+    let title = await pageProfile.$$eval('.bookmark-item', titles => {
+        titles = titles.map(el => el.querySelector('.bookmark-item__info-header > a > span').innerText)
+        return titles;
+    });
     await browser.close();
     console.log("Closing the browser......");
-    return urlsManga;
+    return {
+        urlsManga: urlsManga,
+        title: title,
+    }
 }
 
 module.exports = {StartPars, profilePars};
